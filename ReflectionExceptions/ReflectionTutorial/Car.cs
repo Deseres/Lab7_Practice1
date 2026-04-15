@@ -16,6 +16,11 @@ public class Car
 
     public Car(string brand, string model, int tankCapacity, double fuelConsumption)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(brand, nameof(brand));
+        ArgumentException.ThrowIfNullOrWhiteSpace(model, nameof(model));
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(tankCapacity, 0, nameof(tankCapacity));
+        ArgumentOutOfRangeException.ThrowIfLessThanOrEqual(fuelConsumption, 0, nameof(fuelConsumption));
+
         Brand = brand;
         Model = model;
         TankCapacity = tankCapacity;
@@ -26,9 +31,12 @@ public class Car
 
     public void AddFuel(double amount)
     {
+        ArgumentOutOfRangeException.ThrowIfLessThan(amount, 0, nameof(amount));
+        ArgumentOutOfRangeException.ThrowIfGreaterThan(amount, TankCapacity, nameof(amount));
+
         if (amount + _fuelLevel > TankCapacity)
         {
-            _fuelLevel = TankCapacity;
+            throw new FuelOverflowException(amount, _fuelLevel, TankCapacity);
         }
         else
         {

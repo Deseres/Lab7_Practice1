@@ -2,9 +2,18 @@
 
 var userService = new UserService(connection);
 
-var user = userService.GetUser(1);
+try
+{
+    var user = userService.GetUser(-1);
 
-Console.WriteLine(user);
+    Console.WriteLine(user);
+}
+catch (Exception)
+{
+
+}
+
+Console.WriteLine(connection.ConnectionOpen);
 
 public class DatabaseConnection
 {
@@ -35,11 +44,21 @@ public class UserService
     public string GetUser(int userId)
     {
         _connection.Open();
-
-        var user = _connection.QueryUserById(userId);
-
-        _connection.Close();
-
+        string user = null;
+        try
+        {
+            user = _connection.QueryUserById(userId);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception occured while reading the database");
+            Console.WriteLine(e);
+            throw;
+        }
+        finally
+        {
+            _connection.Close();
+        }
         return user;
     }
 }
