@@ -6,23 +6,23 @@ var car = new Car("Toyota", "Corolla", 50, 6.0);
 Console.WriteLine($"Cars made so far: {Car.CarsMade}");
 
 car.AddFuel(20);
-try
-{
-    car.AddFuel(40);
-}
-catch (FuelOverflowException e)
-{
-    Console.WriteLine($"Excess amount: {e.ExcessAmount}");
-    Console.WriteLine(e.ToString());
-    throw;
-}
+//try
+//{
+//    car.AddFuel(40);
+//}
+//catch (FuelOverflowException e)
+//{
+//    Console.WriteLine($"Excess amount: {e.ExcessAmount}");
+//    Console.WriteLine(e.ToString());
+//    throw;
+//}
 
 
-car.Drive(100);
-car.Drive(200);
+car.Drive(1000);
+//car.Drive(200);
 
 Console.WriteLine($"{car.Brand} {car.Model} drove {car.Odometer} kilometers and remaining fuel is {car.FuelLevel}");
-File.WriteAllText("car.txt", $"{car.Brand};{car.Model};{car.TankCapacity};{car.FuelConsumption};{car.FuelLevel};{car.Odometer}");
+//File.WriteAllText("car.txt", $"{car.Brand};{car.Model};{car.TankCapacity};{car.FuelConsumption};{car.FuelLevel};{car.Odometer}");
 
 
 //var carInfo = File.ReadAllText("car.txt");
